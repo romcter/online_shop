@@ -1,5 +1,6 @@
 package com.design.userservice.rest;
 
+import com.design.dtoservice.user_serviceDto.UserDto;
 import com.design.userservice.entity.User;
 import com.design.userservice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,20 +14,22 @@ public class UserController {
 
     private final UserService userService;
 
+
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
-        User findedUser = userService.findById(id);
+    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
+        UserDto findedUser = userService.findById(id);
         log.info("Found user {}", findedUser);
         return new ResponseEntity<>(findedUser, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<User> postUser(@RequestBody User user) {
-        User savedUser = userService.save(user);
+    public ResponseEntity<UserDto> postUser(@RequestBody User user) {
+        UserDto savedUser = userService.save(user);
         log.info("Saved user {}", savedUser);
         return new ResponseEntity<>(savedUser, HttpStatus.OK);
     }
