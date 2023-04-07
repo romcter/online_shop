@@ -1,4 +1,5 @@
-package com.design.orderservice.entity;
+package com.design.productservice.entity;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,14 +9,15 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import java.util.List;
 
+
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Order extends AbstractBaseEntity {
+@AllArgsConstructor
+public class Product extends AbstractBaseEntity {
 
-    private Long userId;
+    private String description;
 
-    private List<Long> listProductId;
+    private Double price;
 }
