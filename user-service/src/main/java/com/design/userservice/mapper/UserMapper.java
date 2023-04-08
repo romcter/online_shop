@@ -1,7 +1,7 @@
 package com.design.userservice.mapper;
 
 
-import com.design.dtoservice.user_serviceDto.UserDto;
+import com.design.dtoservice.user_service.UserDto;
 import com.design.userservice.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;

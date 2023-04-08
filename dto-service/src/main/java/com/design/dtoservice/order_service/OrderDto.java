@@ -1,6 +1,8 @@
-package com.design.dtoservice.orderDto;
+package com.design.dtoservice.order_service;
 
 import lombok.*;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -8,8 +10,9 @@ import lombok.*;
 @AllArgsConstructor
 public class OrderDto {
 
-    @NonNull
     private Long id;
 
     private Long userId;
+
+    private List<Long> listProductId;
 }

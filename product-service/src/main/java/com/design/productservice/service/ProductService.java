@@ -6,6 +6,8 @@ import com.design.productservice.mapper.ProductMapper;
 import com.design.productservice.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -20,6 +22,10 @@ public class ProductService {
 
     public ProductDto findById(Long id){
         return productMapper.entityToDto(productRepository.findById(id).orElseThrow());
+    }
+
+    public List<ProductDto> findAll(){
+        return productMapper.entitysToDtos(productRepository.findAll());
     }
 
     public ProductDto save(Product product){

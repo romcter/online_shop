@@ -1,14 +1,12 @@
 package com.design.orderservice.controller;
 
+import com.design.dtoservice.order_service.OrderDto;
 import com.design.orderservice.entity.Order;
 import com.design.orderservice.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,9 +30,14 @@ public class OrderController {
 
     @GetMapping("")
     public ResponseEntity<List<Order>> getAllOrder(){
-//        List<Order> orders = orderService.getAllOrder();
-        List<Order> orders = List.of(new Order(1L), new Order(2L), new Order(3L));
+        List<Order> orders = orderService.getAllOrder();
         log.info("Orders: {}", orders);
         return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
+
+    @PutMapping("/add/product")
+    public ResponseEntity<?> addProduct(@RequestBody OrderDto orderDto){
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

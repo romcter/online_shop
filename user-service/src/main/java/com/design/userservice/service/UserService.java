@@ -1,6 +1,6 @@
 package com.design.userservice.service;
 
-import com.design.dtoservice.user_serviceDto.UserDto;
+import com.design.dtoservice.user_service.UserDto;
 import com.design.userservice.entity.User;
 import com.design.userservice.mapper.UserMapper;
 import com.design.userservice.repository.UserRepository;

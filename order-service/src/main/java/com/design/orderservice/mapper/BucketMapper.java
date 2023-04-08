@@ -1,15 +1,15 @@
 package com.design.orderservice.mapper;
 
-import com.design.dtoservice.order_service.OrderDto;
-import com.design.orderservice.entity.Order;
+import com.design.dtoservice.order_service.BucketDto;
+import com.design.orderservice.entity.Bucket;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
         componentModel = "spring")
-public interface OrderMapper {
+public interface BucketMapper {
 
-    OrderDto entityToDto(Order order);
+    BucketDto entityToDto(Bucket bucket);
 
-    Order dtoToEntity(OrderDto orderDTO);
+    Bucket dtoToEntity(BucketDto bucketDTO);
 }

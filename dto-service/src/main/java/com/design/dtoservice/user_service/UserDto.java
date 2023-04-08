@@ -1,4 +1,4 @@
-package com.design.dtoservice.user_serviceDto;
+package com.design.dtoservice.user_service;
 
 import lombok.*;
 
