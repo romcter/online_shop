@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/orders/")
+@RequestMapping("/orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -21,23 +21,17 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable Long id){
         Order order = orderService.getOrder(id);
         log.info("Order: {}", order);
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public ResponseEntity<List<Order>> getAllOrder(){
         List<Order> orders = orderService.getAllOrder();
         log.info("Orders: {}", orders);
         return new ResponseEntity<>(orders, HttpStatus.OK);
-    }
-
-    @PutMapping("/add/product")
-    public ResponseEntity<?> addProduct(@RequestBody OrderDto orderDto){
-
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -26,4 +26,11 @@ public class BucketService {
                 .getProductIds()
                 .add(productId);
     }
+
+    public void deleteProduct(Long bucketId, Long productId){
+        bucketRepository.findById(bucketId)
+                .orElseThrow()
+                .getProductIds()
+                .remove(productId);
+    }
 }
