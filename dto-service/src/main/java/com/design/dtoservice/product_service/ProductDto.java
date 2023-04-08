@@ -1,14 +1,14 @@
 package com.design.dtoservice.product_service;
 
-import lombok.*;
-
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+//import lombok.*;
+//
+//@Setter
+//@Getter
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class ProductDto {
 
-    @NonNull
+//    @NonNull
     private Long id;
 
     private String description;
