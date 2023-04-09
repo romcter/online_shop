@@ -7,6 +7,7 @@
         <groupId>com.design</groupId>
         <artifactId>parent-service</artifactId>
     </parent>
+
     <artifactId>order-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>order-service</name>
@@ -18,11 +19,6 @@
             <groupId>com.design</groupId>
             <artifactId>dto-service</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
         </dependency>
 
 <!--        <dependency>-->

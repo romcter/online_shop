@@ -1,13 +1,12 @@
-package com.design.userservice;
+package com.design.dtoservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserServiceApplication {
+public class DtoServiceApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(UserServiceApplication.class, args);
+        SpringApplication.run(DtoServiceApp.class);
     }
-
 }
