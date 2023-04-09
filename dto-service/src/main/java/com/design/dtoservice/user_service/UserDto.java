@@ -1,25 +1,19 @@
 package com.design.dtoservice.user_service;
 
-//import lombok.*;
-//
+import lombok.*;
+
 import java.util.List;
-//
-//@Setter
-//@Getter
-//@NoArgsConstructor
-//@AllArgsConstructor
+
+@Setter
+@Getter
+@NoArgsConstructor(force = true)
+@AllArgsConstructor
 public class UserDto {
 
-//    @NonNull
+    @NonNull
     private Long id;
 
     private String name;
 
     private List<Long> productIds;
-
-    public UserDto(Long id, String name, List<Long> productIds) {
-        this.id = id;
-        this.name = name;
-        this.productIds = productIds;
-    }
 }

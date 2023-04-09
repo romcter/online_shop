@@ -2,50 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>dto-service</artifactId>
+    <name>dto-service</name>
+    <description>dto-service</description>
+
     <parent>
         <version>0.0.1-SNAPSHOT</version>
         <groupId>com.design</groupId>
         <artifactId>parent-service</artifactId>
     </parent>
-    <groupId>com.design</groupId>
-    <artifactId>dto-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>dto-service</name>
-    <description>dto-service</description>
-    <packaging>pom</packaging>
 
     <build>
         <plugins>
         </plugins>
     </build>
-
-<!--    <dependencies>-->
-<!--        <dependency>-->
-<!--            <groupId>org.projectlombok</groupId>-->
-<!--            <artifactId>lombok</artifactId>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-autoconfigure</artifactId>-->
-<!--        </dependency>-->
-<!--    </dependencies>-->
-
-<!--    <build>-->
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <excludes>-->
-<!--                        <exclude>-->
-<!--                            <groupId>org.projectlombok</groupId>-->
-<!--                            <artifactId>lombok</artifactId>-->
-<!--                        </exclude>-->
-<!--                    </excludes>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-<!--    </build>-->
 
 </project>
