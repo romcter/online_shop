@@ -1,11 +1,12 @@
 package com.design.userservice.entity;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import java.util.List;
 
 
@@ -18,5 +19,6 @@ public class User extends AbstractBaseEntity {
 
     private String name;
 
+    @ElementCollection
     private List<Long> productIds;
 }
