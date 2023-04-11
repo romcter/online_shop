@@ -3,21 +3,13 @@ package com.design.userservice.rest;
 import com.design.dtoservice.user_service.UserDto;
 import com.design.userservice.entity.User;
 import com.design.userservice.service.UserService;
-import io.swagger.annotations.Api;
-
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +31,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "Not found -  User not found")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUser(@PathVariable @Parameter(name = " User id", example = "1") Long id) {
+    public ResponseEntity<UserDto> getUser(@PathVariable  Long id) {
         UserDto foundUser = userService.findById(id);
         log.info("Found user {}", foundUser);
         return new ResponseEntity<>(foundUser, HttpStatus.OK);
@@ -64,7 +56,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Successfully created"),
             @ApiResponse(responseCode = "404", description = "Not found -  User not found")})
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable @Parameter(name = "User id", example = "1") Long id) {
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable  Long id) {
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

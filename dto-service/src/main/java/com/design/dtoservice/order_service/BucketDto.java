@@ -1,5 +1,6 @@
 package com.design.dtoservice.order_service;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BucketDto {
 
+    @Schema(name= "Id" , description = "Bucket id", example = "1")
     private Long id;
 
     private Long userId;

@@ -1,6 +1,7 @@
 package com.design.productservice.controller;
 
-import com.design.dtoservice.product_service.ProductDto;
+import com.design.dtoservice.product_service.ProductDto;import com.design.dtoservice.user_service.UserDto;
+import com.design.productservice.entity.Product;
 import com.design.productservice.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -9,10 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +35,15 @@ public class ProductController {
         return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
     }
 
+    @Operation(summary = "Create new Product", description = "Create a Product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully created"),
+            @ApiResponse(responseCode = "500", description = "Error -  Product has not been created ")})
+    @PostMapping("/")
+    public ResponseEntity<ProductDto> postProduct(@RequestBody @Parameter(name = "product") Product product) {
+        ProductDto savedProduct = productService.save(product);
+        return new ResponseEntity<>(savedProduct, HttpStatus.OK);
+    }
     @Operation(summary = "Get all Product ", description = "Returns all Product")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
