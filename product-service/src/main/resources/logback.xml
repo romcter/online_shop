@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+
+<configuration scan="true">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <param name="Encoding" value="UTF-8"/>
+
+        <!--    should be an env variable in production    -->
+        <remoteHost>localhost</remoteHost>
+
+        <!--    should be an env variable in production    -->
+        <port>5001</port>
+
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"app_name":"YourApp", "app_port": "YourPort"}</customFields>
+        </encoder>
+    </appender>
+
+    <root level="TRACE">
+        <appender-ref ref="logstash"/>
+    </root>
+
+</configuration>
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE configuration>-->
+
+<!--<configuration scan="true">-->
+<!--    <include resource="org/springframework/boot/logging/logback/base.xml"/>-->
+
+<!--    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+<!--        <param name="Encoding" value="UTF-8"/>-->
+
+<!--        &lt;!&ndash;    should be an env variable in production    &ndash;&gt;-->
+<!--        <destination>localhost:5001</destination>-->
+
+<!--        &lt;!&ndash;    should be an env variable in production    &ndash;&gt;-->
+<!--&lt;!&ndash;        <port>5001</port>&ndash;&gt;-->
+
+<!--        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+<!--            <providers>-->
+<!--&lt;!&ndash;                <mdc/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <context/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <logLevel/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <loggerName/>&ndash;&gt;-->
+<!--                <pattern>-->
+<!--                    <pattern>-->
+<!--                        {-->
+<!--                        "appName": "product-service"-->
+<!--                        }-->
+<!--                    </pattern>-->
+<!--                </pattern>-->
+<!--&lt;!&ndash;                <threadName/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <message/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <logstashMarkers/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <stackTrace/>&ndash;&gt;-->
+<!--            </providers>-->
+<!--&lt;!&ndash;            <customFields>{"app_name":"YourApp", "app_port": "YourPort"}</customFields>&ndash;&gt;-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+<!--    <root level="info">-->
+<!--        <appender-ref ref="logstash"/>-->
+<!--    </root>-->
+
+<!--</configuration>-->
