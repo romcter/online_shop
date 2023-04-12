@@ -13,6 +13,7 @@
         <groupId>com.design</groupId>
         <artifactId>parent-service</artifactId>
     </parent>
+
     <dependencies>
         <dependency>
             <groupId>org.springdoc</groupId>

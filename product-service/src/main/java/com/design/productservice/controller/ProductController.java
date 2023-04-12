@@ -1,12 +1,10 @@
 package com.design.productservice.controller;
 
-import com.design.dtoservice.product_service.ProductDto;import com.design.dtoservice.user_service.UserDto;
+import com.design.dtoservice.product_service.ProductDto;
 import com.design.productservice.entity.Product;
 import com.design.productservice.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,31 +23,21 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @Operation(summary = "Get a Product by id", description = "Returns a Product by id")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
-            @ApiResponse(responseCode = "404", description = "Not found -  Product not found")
-    })
     @GetMapping("/{id}")
+    @Operation(summary = "Get a Product by id", description = "Returns a Product by id")
     public ResponseEntity<ProductDto> getProductById(@PathVariable @Parameter(name = " Product id", example = "1") Long id){
         return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
     }
 
-    @Operation(summary = "Create new Product", description = "Create a Product")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully created"),
-            @ApiResponse(responseCode = "500", description = "Error -  Product has not been created ")})
     @PostMapping("/")
+    @Operation(summary = "Create new Product", description = "Create a Product")
     public ResponseEntity<ProductDto> postProduct(@RequestBody @Parameter(name = "product") Product product) {
         ProductDto savedProduct = productService.save(product);
         return new ResponseEntity<>(savedProduct, HttpStatus.OK);
     }
-    @Operation(summary = "Get all Product ", description = "Returns all Product")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
-            @ApiResponse(responseCode = "500", description = "Server Error")
-    })
+
     @GetMapping("/all")
+    @Operation(summary = "Get all products", description = "Returns all products")
     public ResponseEntity<List<ProductDto>> getAllProduct(){
         return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
     }

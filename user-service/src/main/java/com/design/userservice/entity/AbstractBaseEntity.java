@@ -1,6 +1,5 @@
 package com.design.userservice.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +10,6 @@ public abstract class AbstractBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(name= "Id" , description = "User id", example = "1")
     private Long id;
 
     public AbstractBaseEntity(Long id) {
