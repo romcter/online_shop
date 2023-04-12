@@ -1,6 +1,6 @@
 package com.design.orderservice.entity;
 
-import jakarta.persistence.Entity;
+import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

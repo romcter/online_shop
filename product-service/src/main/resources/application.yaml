@@ -11,8 +11,9 @@ spring:
     database-platform : org.hibernate.dialect.H2Dialect
     defer-datasource-initialization : true
     hibernate:
-      ddl-auto=create-drop: create-drop
+      ddl-auto: create-drop
   h2:
     console.enabled : true
+  #logging.level.org.springframework.transaction.interceptor = TRACE
 
   #http://localhost:8080/h2-console for visit h2 database console
