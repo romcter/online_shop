@@ -1,5 +1,6 @@
 package com.design.orderservice.entity;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,5 +18,6 @@ public class Order extends AbstractBaseEntity {
 
     private Long userId;
 
+    @ElementCollection
     private List<Long> listProductId;
 }
