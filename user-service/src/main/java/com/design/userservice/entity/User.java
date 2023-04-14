@@ -16,4 +16,6 @@ public class User extends AbstractBaseEntity {
 
     @ElementCollection
     private List<Long> productIds;
+
+    private Long bucketId;
 }

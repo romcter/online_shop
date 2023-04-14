@@ -1,6 +1,7 @@
 package com.design.userservice.mapper;
 
 
+import com.design.dtoservice.user_service.CreateUserDto;
 import com.design.dtoservice.user_service.UserDto;
 import com.design.userservice.entity.User;
 import org.mapstruct.Mapper;
@@ -13,4 +14,6 @@ public interface UserMapper {
     UserDto entityToDto(User user);
 
     User dtoToEntity(UserDto userDto);
+
+    User dtoToEntity(CreateUserDto createUserDto);
 }

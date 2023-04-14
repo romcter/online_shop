@@ -1,5 +1,6 @@
 package com.design.userservice.rest;
 
+import com.design.dtoservice.user_service.CreateUserDto;
 import com.design.dtoservice.user_service.UserDto;
 import com.design.userservice.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,8 +32,8 @@ public class UserController {
 
     @PostMapping("/")
     @Operation(summary = "Create new user")
-    public ResponseEntity<UserDto> postUser(@RequestBody UserDto user) {
-        UserDto savedUser = userService.save(user);
+    public ResponseEntity<UserDto> postUser(@RequestBody CreateUserDto user) {
+        UserDto savedUser = userService.createUser(user);
         log.info("Saved user {}", savedUser);
         return new ResponseEntity<>(savedUser, HttpStatus.OK);
     }
