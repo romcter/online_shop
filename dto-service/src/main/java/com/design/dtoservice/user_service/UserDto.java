@@ -5,6 +5,8 @@ import lombok.*;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
 
     @Schema(name= "Id" , description = "User id", example = "1")
@@ -15,4 +17,7 @@ public class UserDto {
 
     @Schema(name= "product_ids", description = "Array of user's products", example = "\"productIds\": [ 1 ,2 ,3 ]")
     private List<Long> productIds;
+
+    @Schema(name= "bucket_id", description = "User bucket id", example = "123")
+    private Long bucketId;
 }
