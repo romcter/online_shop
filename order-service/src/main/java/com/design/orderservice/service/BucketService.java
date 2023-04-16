@@ -4,6 +4,7 @@ import com.design.dtoservice.order_service.BucketDto;
 import com.design.orderservice.entity.Bucket;
 import com.design.orderservice.mapper.BucketMapper;
 import com.design.orderservice.repository.BucketRepository;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,13 +22,16 @@ public class BucketService {
         return bucketMapper.entityToDto(bucketRepository.findById(id).orElseThrow());
     }
 
-    public Long createAndAssignBucketToUser(Long userId){
-        Bucket bucket = Bucket
-                .builder()
-                .userId(userId)
-                .build();
+    @KafkaListener(topics = "name", groupId = "groupId")
+    public String createAndAssignBucketToUser(String userId){
+//        Bucket bucket = Bucket
+//                .builder()
+//                .userId(Long.parseLong(userId))
+//                .build();
 
-        return bucketRepository.save(bucket).getId();
+        System.out.println("===================================================================================== 🥰 " + userId);
+
+        return userId;
     }
 
     public void addProduct(Long bucketId, Long productId){
