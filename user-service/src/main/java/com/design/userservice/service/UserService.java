@@ -5,13 +5,12 @@ import com.design.dtoservice.user_service.UserDto;
 import com.design.userservice.entity.User;
 import com.design.userservice.mapper.UserMapper;
 import com.design.userservice.repository.UserRepository;
+import com.design.userservice.rest.feignClient.OrderClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service
@@ -19,12 +18,14 @@ import java.util.List;
 public class UserService {
 
     private final UserMapper userMapper;
+    private final OrderClient orderClient;
     private final UserRepository userRepository;
     private final KafkaTemplate kafkaTemplate;
 
-    public UserService(UserRepository userRepository, UserMapper userMapper, KafkaTemplate kafkaTemplate) {
+    public UserService(UserRepository userRepository, UserMapper userMapper, OrderClient orderClient, KafkaTemplate kafkaTemplate) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
+        this.orderClient = orderClient;
         this.kafkaTemplate = kafkaTemplate;
     }
 
@@ -33,11 +34,9 @@ public class UserService {
     }
 
     public UserDto createUser(CreateUserDto userDto) {
-
         User user = userRepository.save(userMapper.dtoToEntity(userDto));
-
-        //TODO implement functionality for send userId to order-server (bucket controller), create bucket and assign it to User (from user-service) by bucketId in User entity
-
+        Long bucketId = orderClient.createAndAssignBucketToUser(user.getId());
+        user.setBucketId(bucketId);
         return userMapper.entityToDto(userRepository.save(user));
     }
 
@@ -47,14 +46,8 @@ public class UserService {
 
     @Scheduled(fixedRate = 10000)
     public void appAlive() {
-        log.info("\n" + userRepository.findAll() + "🥹");
+        Long bucketId = orderClient.createAndAssignBucketToUser(2L);
+        log.info("\n Send request to /bucket/product and receive {}", bucketId);
         log.info("\n It's scheduler and it's take opportunity just know about working application");
-    }
-
-    @Scheduled(fixedRate = 3000)
-    public void kafkaMessage() {
-
-        userRepository.save(new User("Van", List.of(1L, 13L), 1L));
-        kafkaTemplate.send("order-service", 1L);
     }
 }
