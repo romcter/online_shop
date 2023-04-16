@@ -20,10 +20,12 @@ spring:
 
 
   kafka:
-    #  bootstrap-servers: 127.0.0.1:56820
+    bootstrap:
+      servers: 'localhost:9092'
+#    #  bootstrap-servers: 127.0.0.1:56820
     consumer:
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
         spring:
           json:
@@ -31,7 +33,9 @@ spring:
               packages: "*"
 #            type:
 #              mapping: event:com.design.orderservice.service.Dto
-
+            add:
+              type:
+                headers: false
   #        spring:
 #          deserializer:
 #            value:
