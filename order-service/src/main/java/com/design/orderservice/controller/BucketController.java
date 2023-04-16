@@ -15,10 +15,10 @@ public class BucketController {
         this.bucketService = bucketService;
     }
 
-//    @PostMapping("/product")
-//    public ResponseEntity<Long> createAndAssignBucketToUser(@RequestBody Long userId){
-//        return new ResponseEntity<>(bucketService.createAndAssignBucketToUser(userId), HttpStatus.OK);
-//    }
+    @PostMapping("/product")
+    public ResponseEntity<Long> createAndAssignBucketToUser(@RequestBody Long userId){
+        return new ResponseEntity<>(bucketService.createAndAssignBucketToUser(userId), HttpStatus.OK);
+    }
 
     @PutMapping("/product")
     public ResponseEntity<HttpStatus> addProduct(@RequestParam Long bucketId, @RequestParam Long productId){
