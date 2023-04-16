@@ -44,7 +44,7 @@ public class KafkaProducerConfig {
         kafkaTemplate.setProducerListener(new ProducerListener<String, String>() {
             @Override
             public void onSuccess(ProducerRecord<String, String> producerRecord, RecordMetadata recordMetadata) {
-                System.out.printf("ACK from ProducerListener message: {} offset:  {}", producerRecord.value(), recordMetadata.offset());
+                System.out.printf("\n 🙃 ACK from ProducerListener message: {} offset:  {}", producerRecord.value(), recordMetadata.offset());
             }
         });
         return kafkaTemplate;

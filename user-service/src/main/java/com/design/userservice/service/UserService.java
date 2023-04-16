@@ -11,6 +11,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @EnableScheduling
@@ -43,13 +45,16 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    @Scheduled(fixedRate = 30000)
+    @Scheduled(fixedRate = 10000)
     public void appAlive() {
-        log.info("It's scheduler and it's take opportunity just know about working application");
+        log.info("\n" + userRepository.findAll() + "🥹");
+        log.info("\n It's scheduler and it's take opportunity just know about working application");
     }
 
     @Scheduled(fixedRate = 3000)
     public void kafkaMessage() {
+
+        userRepository.save(new User("Van", List.of(1L, 13L), 1L));
         kafkaTemplate.send("order-service", 1L);
     }
 }
