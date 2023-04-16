@@ -6,6 +6,7 @@ import com.design.userservice.entity.User;
 import com.design.userservice.mapper.UserMapper;
 import com.design.userservice.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -17,17 +18,19 @@ public class UserService {
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+    private final KafkaTemplate kafkaTemplate;
 
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
+    public UserService(UserRepository userRepository, UserMapper userMapper, KafkaTemplate kafkaTemplate) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
-    public UserDto findById(Long id){
+    public UserDto findById(Long id) {
         return userMapper.entityToDto(userRepository.findById(id).orElseThrow());
     }
 
-    public UserDto createUser(CreateUserDto userDto){
+    public UserDto createUser(CreateUserDto userDto) {
 
         User user = userRepository.save(userMapper.dtoToEntity(userDto));
 
@@ -36,12 +39,17 @@ public class UserService {
         return userMapper.entityToDto(userRepository.save(user));
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
     @Scheduled(fixedRate = 30000)
-    public void appAlive(){
+    public void appAlive() {
         log.info("It's scheduler and it's take opportunity just know about working application");
+    }
+
+    @Scheduled(fixedRate = 3000)
+    public void kafkaMessage() {
+        kafkaTemplate.send("order-service", 1L);
     }
 }

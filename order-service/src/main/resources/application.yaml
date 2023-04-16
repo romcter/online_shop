@@ -1,3 +1,5 @@
+spring.application.name: order-service
+
 server:
   port : 8081
 
@@ -15,3 +17,11 @@ spring:
       ddl-auto=create-drop: create-drop
   h2:
     console.enabled: true
+
+
+  kafka:
+    groupId: order-service
+    name:
+      user-service: user-service
+      order-service: order-service
+    bootstrap-server: localhost:9092

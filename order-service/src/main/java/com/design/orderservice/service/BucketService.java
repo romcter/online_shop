@@ -1,11 +1,14 @@
 package com.design.orderservice.service;
 
-import com.design.dtoservice.order_service.BucketDto;
+import lombok.extern.slf4j.Slf4j;
 import com.design.orderservice.entity.Bucket;
-import com.design.orderservice.mapper.BucketMapper;
-import com.design.orderservice.repository.BucketRepository;
 import org.springframework.stereotype.Service;
+import com.design.orderservice.mapper.BucketMapper;
+import com.design.dtoservice.order_service.BucketDto;
+import org.springframework.kafka.annotation.KafkaListener;
+import com.design.orderservice.repository.BucketRepository;
 
+@Slf4j
 @Service
 public class BucketService {
 
@@ -21,14 +24,22 @@ public class BucketService {
         return bucketMapper.entityToDto(bucketRepository.findById(id).orElseThrow());
     }
 
+    @KafkaListener(topics = "${spring.kafka.name.order-service}")
     public Long createAndAssignBucketToUser(Long userId){
+
         Bucket bucket = Bucket
                 .builder()
                 .userId(userId)
                 .build();
 
-        return bucketRepository.save(bucket).getId();
+        bucket = bucketRepository.save(bucket);
+
+        log.info("generated bucketId {} for userId {} 🥰 ", bucket.getId(), userId);
+
+        return bucket.getId();
     }
+
+
 
     public void addProduct(Long bucketId, Long productId){
         bucketRepository.findById(bucketId)
