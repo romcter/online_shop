@@ -1,3 +1,5 @@
+spring.application.name: user-service
+
 server:
   port : 8082
 
@@ -16,3 +18,21 @@ spring:
     console.enabled : true
 
   #http://localhost:8080/h2-console for visit h2 database console
+
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+#    producer:
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#    streams:
+#      properties:
+#        default.key.serde: org.apache.kafka.common.serialization.Serdes$LongSerde
+#        default.value.serde: org.springframework.kafka.support.serializer.JsonSerde
+#        spring.json.trusted.packages: "*"
+#      state-dir: /tmp/kafka-streams/
+#
+#  spring.output.ansi.enabled: ALWAYS
+
+  logging.pattern.console: "%clr(%d{HH:mm:ss.SSS}){blue} %clr(---){faint} %clr([%15.15t]){yellow} %clr(:){red} %clr(%m){faint}%n"

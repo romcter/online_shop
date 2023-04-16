@@ -6,6 +6,7 @@ import com.design.userservice.entity.User;
 import com.design.userservice.mapper.UserMapper;
 import com.design.userservice.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,12 @@ public class UserService {
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+    private final KafkaTemplate kafkaTemplate;
 
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
+    public UserService(UserRepository userRepository, UserMapper userMapper, KafkaTemplate kafkaTemplate) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     public UserDto findById(Long id){
@@ -31,6 +34,7 @@ public class UserService {
 
         User user = userRepository.save(userMapper.dtoToEntity(userDto));
 
+        kafkaTemplate.send("name", new Dto(1L, "Rom"));
         //TODO implement functionality for send userId to order-server (bucket controller), create bucket and assign it to User (from user-service) by bucketId in User entity
 
         return userMapper.entityToDto(userRepository.save(user));
