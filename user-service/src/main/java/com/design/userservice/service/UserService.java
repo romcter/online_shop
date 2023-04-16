@@ -46,8 +46,6 @@ public class UserService {
 
     @Scheduled(fixedRate = 10000)
     public void appAlive() {
-        Long bucketId = orderClient.createAndAssignBucketToUser(2L);
-        log.info("\n Send request to /bucket/product and receive {}", bucketId);
-        log.info("\n It's scheduler and it's take opportunity just know about working application");
+        log.info("\n It's scheduler and it's take opportunity just know about working application 🤓");
     }
 }
