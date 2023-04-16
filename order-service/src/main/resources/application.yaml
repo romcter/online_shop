@@ -20,32 +20,8 @@ spring:
 
 
   kafka:
-    bootstrap:
-      servers: 'localhost:9092'
-#    #  bootstrap-servers: 127.0.0.1:56820
-    consumer:
-#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      properties:
-        spring:
-          json:
-            trusted:
-              packages: "*"
-#            type:
-#              mapping: event:com.design.orderservice.service.Dto
-            add:
-              type:
-                headers: false
-  #        spring:
-#          deserializer:
-#            value:
-#              delegate:
-#                class: org.springframework.kafka.support.serializer.JsonDeserializer
-#    producer:
-#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-
-
-  spring.output.ansi.enabled: ALWAYS
-
-  logging.pattern.console: "%clr(%d{HH:mm:ss.SSS}){blue} %clr(---){faint} %clr([%15.15t]){yellow} %clr(:){red} %clr(%m){faint}%n"
+    groupId: order-service
+    name:
+      user-service: user-service
+      order-service: order-service
+    bootstrap-server: localhost:9092

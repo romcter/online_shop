@@ -26,26 +26,30 @@ public class UserService {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public UserDto findById(Long id){
+    public UserDto findById(Long id) {
         return userMapper.entityToDto(userRepository.findById(id).orElseThrow());
     }
 
-    public UserDto createUser(CreateUserDto userDto){
+    public UserDto createUser(CreateUserDto userDto) {
 
         User user = userRepository.save(userMapper.dtoToEntity(userDto));
 
-        kafkaTemplate.send("name", new Dto(1L, "Rom"));
         //TODO implement functionality for send userId to order-server (bucket controller), create bucket and assign it to User (from user-service) by bucketId in User entity
 
         return userMapper.entityToDto(userRepository.save(user));
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
     @Scheduled(fixedRate = 30000)
-    public void appAlive(){
+    public void appAlive() {
         log.info("It's scheduler and it's take opportunity just know about working application");
+    }
+
+    @Scheduled(fixedRate = 3000)
+    public void kafkaMessage() {
+        kafkaTemplate.send("order-service", 1L);
     }
 }
