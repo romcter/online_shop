@@ -1,10 +1,9 @@
 package com.design.productservice.controller;
 
 import com.design.dtoservice.product_service.ProductDto;
-import com.design.productservice.entity.Product;
+import com.design.dtoservice.product_service.ProductWithIdDto;
 import com.design.productservice.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +24,21 @@ public class ProductController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get a Product by id", description = "Returns a Product by id")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable @Parameter(name = " Product id", example = "1") Long id){
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id){
         return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping("/")
     @Operation(summary = "Create new Product", description = "Create a Product")
-    public ResponseEntity<ProductDto> postProduct(@RequestBody @Parameter(name = "product") Product product) {
-        ProductDto savedProduct = productService.save(product);
+    public ResponseEntity<ProductDto> postProduct(@RequestBody ProductDto productDto) {
+        ProductDto savedProduct = productService.save(productDto);
+        return new ResponseEntity<>(savedProduct, HttpStatus.OK);
+    }
+
+    @PutMapping("/")
+    @Operation(summary = "Update existing product", description = "Update product")
+    public ResponseEntity<ProductWithIdDto> updateProduct(@RequestBody ProductWithIdDto productDto) {
+        ProductWithIdDto savedProduct = productService.update(productDto);
         return new ResponseEntity<>(savedProduct, HttpStatus.OK);
     }
 
