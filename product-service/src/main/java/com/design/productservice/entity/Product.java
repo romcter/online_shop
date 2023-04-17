@@ -1,9 +1,9 @@
 package com.design.productservice.entity;
 
+import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
 
 @Data
 @Entity
