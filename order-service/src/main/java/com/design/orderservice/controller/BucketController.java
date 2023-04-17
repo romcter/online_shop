@@ -1,5 +1,6 @@
 package com.design.orderservice.controller;
 
+import com.design.dtoservice.order_service.bucket.ChangeBucket;
 import com.design.orderservice.service.BucketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +22,14 @@ public class BucketController {
     }
 
     @PutMapping("/product")
-    public ResponseEntity<HttpStatus> addProduct(@RequestParam Long bucketId, @RequestParam Long productId){
-        bucketService.addProduct(bucketId, productId);
+    public ResponseEntity<HttpStatus> addProduct(@RequestBody ChangeBucket changeBucket){
+        bucketService.addProduct(changeBucket);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/product")
-    public ResponseEntity<HttpStatus> deleteProduct(@RequestParam Long bucketId, @RequestParam Long productId){
-        bucketService.deleteProduct(bucketId, productId);
+    public ResponseEntity<HttpStatus> deleteProduct(@RequestBody ChangeBucket changeBucket){
+        bucketService.deleteProduct(changeBucket);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

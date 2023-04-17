@@ -39,7 +39,9 @@ services:
   spring-boot-app:
     container_name: user-service
     ports:
-      - "8082:8082"
+      - 8082:8082
+    expose:
+      - 8082
     build: ./user-service/
     restart: on-failure
 
