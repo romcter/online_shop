@@ -1,10 +1,11 @@
 package com.design.orderservice.service;
 
+import com.design.dtoservice.order_service.bucket.ChangeBucket;
 import lombok.extern.slf4j.Slf4j;
 import com.design.orderservice.entity.Bucket;
 import org.springframework.stereotype.Service;
 import com.design.orderservice.mapper.BucketMapper;
-import com.design.dtoservice.order_service.BucketDto;
+import com.design.dtoservice.order_service.bucket.BucketDto;
 import org.springframework.kafka.annotation.KafkaListener;
 import com.design.orderservice.repository.BucketRepository;
 
@@ -39,19 +40,17 @@ public class BucketService {
         return bucket.getId();
     }
 
-
-
-    public void addProduct(Long bucketId, Long productId){
-        bucketRepository.findById(bucketId)
+    public void addProduct(ChangeBucket changeBucket){
+        bucketRepository.findById(changeBucket.getBucketId())
                 .orElseThrow()
                 .getProductIds()
-                .add(productId);
+                .addAll(changeBucket.getProductIds());
     }
 
-    public void deleteProduct(Long bucketId, Long productId){
-        bucketRepository.findById(bucketId)
+    public void deleteProduct(ChangeBucket changeBucket){
+        bucketRepository.findById(changeBucket.getBucketId())
                 .orElseThrow()
                 .getProductIds()
-                .remove(productId);
+                .removeAll(changeBucket.getProductIds());
     }
 }

@@ -1,6 +1,6 @@
 package com.design.orderservice.mapper;
 
-import com.design.dtoservice.order_service.BucketDto;
+import com.design.dtoservice.order_service.bucket.BucketDto;
 import com.design.orderservice.entity.Bucket;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
