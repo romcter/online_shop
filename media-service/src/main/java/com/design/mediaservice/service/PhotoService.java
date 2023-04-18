@@ -23,6 +23,9 @@ public class PhotoService {
         try {
             photo.setImage(
                     new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+            photo.setTitle(title);
+            photo.setOriginalFileName(file.getOriginalFilename());
+            photo.setContentType(file.getContentType());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

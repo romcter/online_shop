@@ -24,7 +24,8 @@ public class PhotoController {
         Photo photo = photoService.getPhoto(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .contentType(MediaType.valueOf(MediaType.IMAGE_PNG_VALUE))
+                .contentType(MediaType.parseMediaType(photo.getContentType()))
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + photo.getOriginalFileName() + "\"")
                 .body(new ByteArrayResource(photo.getImage().getData()));
     }
 
