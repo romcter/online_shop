@@ -19,7 +19,7 @@ public class PhotoService {
     }
 
     public String addPhoto(String title, MultipartFile file) {
-        Photo photo = new Photo("id" ,title);
+        Photo photo = new Photo(title);
         try {
             photo.setImage(
                     new Binary(BsonBinarySubType.BINARY, file.getBytes()));
