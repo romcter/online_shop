@@ -12,13 +12,16 @@ public class Photo {
 
     private String title;
 
+    private String originalFileName;
+
+    private String contentType;
+
     private Binary image;
 
     public Photo() {
     }
 
-    public Photo(String id, String title) {
-        this.id = id;
+    public Photo(String title) {
         this.title = title;
     }
 
@@ -43,6 +46,22 @@ public class Photo {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getOriginalFileName() {
+        return originalFileName;
+    }
+
+    public void setOriginalFileName(String originalFileName) {
+        this.originalFileName = originalFileName;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
     }
 
     public Binary getImage() {
