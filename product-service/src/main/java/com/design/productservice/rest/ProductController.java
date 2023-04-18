@@ -1,4 +1,4 @@
-package com.design.productservice.controller;
+package com.design.productservice.rest;
 
 import com.design.dtoservice.product_service.ProductDto;
 import com.design.dtoservice.product_service.ProductWithIdDto;
@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,14 +25,15 @@ public class ProductController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get a Product by id", description = "Returns a Product by id")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id){
+    public ResponseEntity<ProductWithIdDto> getProductById(@PathVariable Long id){
         return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping("/")
     @Operation(summary = "Create new Product", description = "Create a Product")
-    public ResponseEntity<ProductDto> postProduct(@RequestBody ProductDto productDto) {
-        ProductDto savedProduct = productService.save(productDto);
+    public ResponseEntity<ProductWithIdDto> postProduct(@ModelAttribute ProductDto productDto,
+                                                  @RequestParam("image") MultipartFile image) {
+        ProductWithIdDto savedProduct = productService.save(productDto, image);
         return new ResponseEntity<>(savedProduct, HttpStatus.OK);
     }
 
