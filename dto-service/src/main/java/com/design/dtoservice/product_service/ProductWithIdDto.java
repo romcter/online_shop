@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,6 +23,9 @@ public class ProductWithIdDto {
 
     @Schema(name= "price" , description = "product price", example ="100.00")
     private Double price;
+
+    @Schema(name= "photoId" , description = "media id", example ="{ 643e48c140c0b76a959ff484 }")
+    private List<String> photoId = new ArrayList<>();
 }
 
 
