@@ -1,6 +1,51 @@
 version: '3'
 services:
 
+  user-service:
+    container_name: user-service
+    ports:
+      - 8082:8082
+    expose:
+      - 8082
+    build: ./user-service/
+    restart: on-failure
+
+  media-service:
+    container_name: media-service
+    ports:
+      - 8084:8084
+    build: ./media-service/
+    restart: on-failure
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    environment:
+      - HOST_NAME=mongo
+
+  mongo:
+    ports:
+      - '27017:27017'
+    container_name: dkrcomp-mongo
+    restart: always
+    logging:
+      options:
+        max-size: 1g
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=bdung
+    image: mongo
+
+  postgresDb:
+    image: postgres:13.2
+    container_name: docker-postgres-db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=spring_boot_postgres_db
+
   zookeeper:
     image: bitnami/zookeeper:latest
     restart: always
@@ -36,39 +81,16 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: CLIENT
       ALLOW_PLAINTEXT_LISTENER: 'yes'
 
-  spring-boot-app:
-    container_name: user-service
-    ports:
-      - 8082:8082
-    expose:
-      - 8082
-    build: ./user-service/
-    restart: on-failure
-
   nginx:
     image: nginx:latest
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
-      - spring-boot-app
+      - user-service
     links:
-      - spring-boot-app
+      - user-service
     ports:
       - 80:80
-
-  postgresDb:
-    image: postgres:13.2
-    container_name: docker-postgres-db
-    ports:
-      - 5432:5432
-#    networks:
-#      - network
-#    volumes:
-#      - volume:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=spring_boot_postgres_db
 
   elastic-search:
     image: elasticsearch:7.14.1
