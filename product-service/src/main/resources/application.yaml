@@ -1,5 +1,5 @@
 server:
-  port : 8083
+  port : ${PORT:8083}
 
 spring:
   datasource:
@@ -14,6 +14,8 @@ spring:
       ddl-auto: create-drop
   h2:
     console.enabled : true
-  #logging.level.org.springframework.transaction.interceptor = TRACE
 
   #http://localhost:8080/h2-console for visit h2 database console
+logging:
+  level:
+    root: INFO
