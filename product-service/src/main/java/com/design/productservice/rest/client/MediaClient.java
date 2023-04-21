@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-@FeignClient(value = "media-service", url = "http://localhost:8084/image")
+@FeignClient(value = "media-service", url = "${services.media.url}/image")
 public interface MediaClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

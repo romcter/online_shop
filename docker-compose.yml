@@ -29,10 +29,12 @@ services:
       - 8083:8083
     expose:
       - 8083
+      - 8084
     build: ./product-service/
     restart: on-failure
     environment:
       - PORT=8083
+      - MEDIA_SERVICE_URL=http://media-service:8084
 
   mongo:
     ports:
