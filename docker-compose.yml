@@ -9,6 +9,22 @@ services:
       - 8082
     build: ./user-service/
     restart: on-failure
+    depends_on:
+      - kafka
+
+  order-service:
+    container_name: order-service
+    ports:
+      - 8081:8081
+    expose:
+      - 8081
+      - 9092
+    build: ./order-service/
+    restart: on-failure
+    environment:
+      - BOOTSTRAP_SERVER=kafka:9092
+    depends_on:
+      - kafka
 
   media-service:
     container_name: media-service
