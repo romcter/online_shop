@@ -1,8 +1,8 @@
 package com.design.orderservice.controller;
 
-import com.design.dtoservice.order_service.OrderDto;
 import com.design.orderservice.entity.Order;
 import com.design.orderservice.service.OrderService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +12,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@Tag(name = "Order API")
 @RequestMapping("/orders")
 public class OrderController {
 
